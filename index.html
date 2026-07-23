@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ZZS | ZebZerro Studious Productions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="images/ic_launcher_0.png">
+  <meta name="theme-color" content="#17191a">
+  <meta name="color-scheme" content="dark">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #17191a;
+      color: #ececec;
+      min-height: 100%;
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 1600px;
+      margin: 0px auto;
+      padding: 2px 10px 0 10px;
+    }
+    .cta-row {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 38px 0 23px 0;
+      animation: popIn 1.4s;
+    }
+    .cta-btn {
+      padding: 11px 28px;
+      border: none;
+      border-radius: 1.1rem;
+      background: linear-gradient(90deg, #13b0bc, #287dfd);
+      color: #fff;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: .7px;
+      cursor: pointer;
+      box-shadow: 0 3px 16px #0004;
+      transition: background .2s, transform .13s;
+      margin-bottom: 6px;
+    }
+    .cta-btn:hover {
+      background: linear-gradient(90deg, #287dfd, #13b0bc);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 7px 24px #0007;
+    }
+    form {
+      background: #232526;
+      border-radius: 1.0rem;
+      box-shadow: 0 2px 14px #0003;
+      padding: 25px 16px 18px 16px;
+      max-width: 450px;
+      margin: 0 auto 38px auto;
+      animation: fadeInUp 1.6s;
+    }
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .98rem;
+      color: #5ce0b9;
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      margin-bottom: 13px;
+      border-radius: .5rem;
+      border: 1.3px solid #26353c;
+      background: #171a1b;
+      color: #fff;
+      font-size: 1.06rem;
+      padding: 8px;
+      font-family: inherit;
+      outline: none;
+      box-sizing: border-box;
+      transition: border .18s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border: 1.3px solid #51ffd6;
+    }
+    textarea {
+      min-height: 65px;
+      resize: vertical;
+    }
+    .footer {
+      text-align: center;
+      color: #b8e1ff;
+      font-size: 1rem;
+      margin-top: 22px;
+      margin-bottom: 9px;
+      opacity: 0.85;
+    }
+    .footer .made {
+      font-size: 1.06rem;
+      color: #56ffc1;
+      font-weight: 700;
+      letter-spacing: .6px;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    .footer .social {
+      margin-top: 8px;
+    }
+    .footer .social a {
+      color: #29e8a9;
+      margin: 0 10px;
+      font-size: 1.7rem;
+      transition: color 0.18s;
+      vertical-align: middle;
+    }
+    .footer .social a:hover {
+      color: #ffe240;
+    }
+/*    @media (max-width: 900px) {
+      .twocols { flex-direction: column; gap: 18px; }
+      .twocol-content { max-width: 100%; min-width: 0; }
+    } */
+    @media (max-width: 600px) {
+      .container { padding: 5px 1.5vw; }
+      .cta-row { flex-direction: column; gap: 9px; }
+    }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-18px);} to {opacity: 1; transform: none;}}
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(18px);} to {opacity: 1; transform: none;}}
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-16px);} to {opacity: 1; transform: none;}}
+    @keyframes popIn { 0% { opacity: 0; transform: scale(0.88);} 80% { opacity: 1; transform: scale(1.04);} 100% { opacity: 1; transform: scale(1);}}
+    /* Carousel */
+    .carousel{
+      width:95%;
+      max-width:1800px;
+      margin: 40px auto 8px auto;
+      overflow:hidden;
+      border-radius:0;/*18px;*/
+      background:#202325;
+      box-shadow: 0 8px 28px rgba(0,0,0,.35);
+    }
+    .carousel-track{
+      display:flex;
+      width:max-content;
+      animation:scrollCarousel 32s linear infinite;
+    }
+    .carousel:hover .carousel-track {
+      animation-play-state: paused;
+    }
+    /* Items */
+    .carousel-item {
+      flex: 0 0 260px;
+      height: auto;
+      margin: 16px;
+      border-radius: 14px;
+      border: 2px solid #f1f1f1;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 4px 18px rgba(0,0,0,.4);
+    }
+    .carousel-item img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+      border-radius: 14px 14px 0 0;
+      transition: transform .35s;
+    }
+    .carousel-item a {
+      display: block;
+      color: white;
+      text-decoration: none;
+    }
+    .carousel-title {
+      text-align: center;
+      padding: 8px 5px;
+      color: #51ffd6;
+      font-size: 0.95rem;
+      font-weight: 700;
+      background: #202325;
+    }
+    .carousel-item:hover img {
+      transform: scale(1.06);
+    }
+
+    @keyframes scrollCarousel {
+      from {
+         transform: translateX(0);
+      }
+      to {
+         transform: translateX(calc(-260px * 8));
+      }
+    }
+/*
+    @media (max-width:700px){
+      .carousel-item{
+         flex:0 0 220px;
+         height:auto;
+         margin:10px;
+      }
+     .carousel-item img{
+         height:145px;
+     }
+    .carousel-title{
+      display:block;
+      padding:8px 5px;
+      font-size:0.9rem;
+    }
+    .carousel-track{
+      width:max-content;
+    } */
+
+/* Desktop: hide horizontal carousel */
+@media (min-width: 701px) {
+  .carousel {
+    display: none;
+  }
+}
+
+/* Mobile: hide dynamic showcase */
+@media (max-width: 700px) {
+  .dynamic-feed {
+    display: none!important;
+  }
+}
+
+  
+
+
+/* start */
+
+
+/* Dynamic content cards - desktop only */
+.dynamic-feed {
+  max-width: 1500px;
+  margin: 25px auto 10px auto;
+}
+
+
+.feed-window {
+  height: calc(100vh - 370px);
+  overflow: hidden;
+  position: relative;
+}
+
+
+/* Desktop only */
+@media (min-width: 701px) {
+  .dynamic-feed {
+    margin-top: 45px;
+  }
+}
+
+
+.dynamic-grid {
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:22px;
+ align-items:start;
+
+ will-change:transform;
+}
+
+
+
+
+/* .feed-window {
+ height:900px;
+ overflow:hidden;
+} */
+
+
+
+
+
+.dynamic-card img {
+  width:100%;
+  height:auto;
+  max-height:320px;
+  object-fit:cover;
+}
+
+.dynamic-card {
+  background: #202325;
+  border: 2px solid #f1f1f1;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(0,0,0,.35);
+  transition: transform .2s, box-shadow .2s;
+  animation: fadeInUp .7s;
+}
+
+.dynamic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.55);
+}
+
+.dynamic-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.dynamic-card-content {
+  padding: 15px;
+}
+
+.dynamic-card-title {
+  color: #51ffd6;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.dynamic-card-text {
+  color: #ececec;
+  line-height: 1.45;
+  font-size: .95rem;
+}
+
+.dynamic-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.show-more-box {
+  text-align: center;
+  margin: 30px 0 35px 0;
+}
+
+.show-more-btn {
+  padding: 13px 42px;
+  border: none;
+  border-radius: 1.2rem;
+  background: linear-gradient(90deg,#ff8c00,#ffb300);
+  color: #17191a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 18px #0006;
+  transition: transform 0.2s;
+}
+
+.show-more-btn:hover {
+  transform: scale(1.05);
+}
+
+
+/* Mobile untouched */
+@media (max-width:700px) {
+  .dynamic-grid{
+	grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* Desktop showcase only - hidden on mobile */
+@media (max-width: 700px) {
+
+  /* .dynamic-feed {
+    display: none!important;
+  } */
+
+}
+
+/* end */
+
+  </style>
+  <script>
+    function showForm(formId) {
+      document.getElementById('demoForm').style.display = 'none';
+      document.getElementById('orderForm').style.display = 'none';
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById(formId).style.display = 'block';
+    }
+  </script>
+</head>
+
+
+<body>
+
+
+<div class="carousel">
+  <div class="carousel-track">
+    <div class="carousel-item"><a href="index_0.html"><img src="images/0.jpg" alt=""></a><div class="carousel-title">CROP DUSTER</div></div>
+    <div class="carousel-item"><a href="index_1.html"><img src="images/1.jpg" alt=""></a><div class="carousel-title">RIFLE</div></div>
+    <div class="carousel-item"><a href="index_2.html"><img src="images/2.jpg" alt=""></a><div class="carousel-title">BRIDGE</div></div>
+    <div class="carousel-item"><a href="index_3.html"><img src="images/3.jpg" alt=""></a><div class="carousel-title">PLANE</div></div>
+    <div class="carousel-item"><a href="index_3.html"><img src="images/4.jpg" alt=""></a><div class="carousel-title">LANDSCAPE</div></div>
+    <div class="carousel-item"><a href="index_4.html"><img src="images/5.jpg" alt=""></a><div class="carousel-title">TERRITORY</div></div>
+    <div class="carousel-item"><a href="index_5.html"><img src="images/6.jpg" alt=""></a><div class="carousel-title">SHUTTLE</div></div>
+    <div class="carousel-item"><a href="index_6.html"><img src="images/7.jpg" alt=""></a><div class="carousel-title">SLINGSHOT</div></div>
+    <div class="carousel-item"><a href="index_7.html"><img src="images/8.jpg" alt=""></a><div class="carousel-title">SAMURAI</div></div>
+    <div class="carousel-item"><a href="index_8.html"><img src="images/9.jpg" alt=""></a><div class="carousel-title">BOMBER</div></div>
+    <div class="carousel-item"><a href="index_9.html"><img src="images/a.jpg" alt=""></a><div class="carousel-title">CARAVELLE</div></div>
+  </div>
+</div>
+
+
+<div class="container">
+<!-- start -->
+<div class="dynamic-feed">
+ <div class="feed-window">
+  <div id="dynamicGrid" class="dynamic-grid">
+  </div>
+ </div>
+
+  <div class="show-more-box">
+    <button class="show-more-btn" onclick="loadMoreCards()">
+      Show more ...
+    </button>
+  </div>
+
+</div>
+<!-- end -->
+    <div class="cta-row">
+      <button class="cta-btn" onclick="showForm('demoForm')">Request Information</button>
+      <button class="cta-btn" onclick="showForm('orderForm')">Order an Item</button>
+      <button class="cta-btn" onclick="showForm('contactForm')">Contact Us</button>
+    </div>
+<!-- FORMS -->
+<form id="demoForm"
+      data-email="funnyguystudio@gmail.com"
+      data-subject="Request Demo"
+      style="display:none;">
+
+    <h2>Demo anfragen / Request Demo</h2>
+
+    <label>Name / Name</label>
+    <input type="text" required>
+
+    <label>E-Mail / Email</label>
+    <input type="email" required>
+
+    <label>Institut, Unternehmen / Institution, Company</label>
+    <input type="text">
+
+    <label>Nachricht / Message</label>
+    <textarea></textarea>
+
+    <button type="submit" class="cta-btn">
+        Absenden / Send
+    </button>
+</form>
+<form id="orderForm"
+      data-email="funnyguystudio@gmail.com"
+      data-subject="Order Prototype"
+      style="display:none;">
+
+    <h2>Order Prototype</h2>
+
+    <label>Name</label>
+    <input type="text" required>
+
+    <label>Email</label>
+    <input type="email" required>
+
+    <label>Institution, Company</label>
+    <input type="text">
+
+    <label>Message</label>
+    <textarea></textarea>
+
+    <button type="submit" class="cta-btn">
+        Send
+    </button>
+
+</form>
+<form id="contactForm"
+      data-email="funnyguystudio@gmail.com"
+      data-subject="Contact Request"
+      style="display:none;">
+
+    <h2>Contact Us</h2>
+
+    <label>Name</label>
+    <input type="text" required>
+
+    <label>Email</label>
+    <input type="email" required>
+
+    <label>Institution, Company</label>
+    <input type="text">
+
+    <label>Message</label>
+    <textarea></textarea>
+
+    <button type="submit" class="cta-btn">
+        Send
+    </button>
+
+</form>
+<div class="footer">
+      <span class="made">Made in EU | Hergestellt in EU | Prodotto nell'UE | Fabrique en UE </span><br>
+      <br>
+      &copy; 2026   ZebZerro Studios.   All rights reserved. 
+      <div class="social">
+        <br>
+        <a href="mailto:funnyguystudio@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://youtube.com/@ZebZerro" target="_blank" title="Youtube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+</div>
+<!-- SCRIPST -->
+<script>
+    // Hide the forms on click outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('cta-btn') && !e.target.closest('form')) {
+        document.getElementById('demoForm').style.display = 'none';
+        document.getElementById('orderForm').style.display = 'none';
+        document.getElementById('contactForm').style.display = 'none';
+      }
+    });
+    // Animate forms (optional) - Universal mailto handler
+    document.querySelectorAll("form").forEach(function(form){
+    form.addEventListener("submit",function(e){
+        e.preventDefault();
+        const email = form.dataset.email;
+        const subject = form.dataset.subject;
+
+        const fields = form.querySelectorAll("input, textarea");
+        const name = fields[0].value;
+        const mail = fields[1].value;
+        const institution = fields[2].value;
+        const message = fields[3].value;
+        const body =
+            "Name: " + name + "\n" +
+            "Email: " + mail + "\n" +
+            "Institution / Company: " + institution + "\n" +
+            "Message:\n\n" + message;
+        window.location.href =
+            "mailto:"
+            + email
+            + "?subject="
+            + encodeURIComponent(subject)
+            + "&body="
+            + encodeURIComponent(body);
+        form.reset();
+        form.style.display = "none";
+    });
+    });
+</script>
+<script>
+	function restartCarousel() {
+	    const track = document.querySelector('.carousel-track');
+	    if (!track) return;
+
+	    track.style.animation = 'none';
+	    track.offsetHeight; // ?????????????? reflow
+	    track.style.animation = 'scrollCarousel 32s linear infinite';
+	}
+
+	window.addEventListener('pageshow', restartCarousel);
+	document.addEventListener('visibilitychange', () => {
+	    if (!document.hidden) restartCarousel();
+	});
+
+</script>
+
+<!-- start --> 
+<script>
+
+const contentLibrary = [
+
+{
+title:"CROP DUSTER",
+image:"images/0.jpg",
+link:"index_0.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"RIFLE",
+image:"images/1.jpg",
+link:"index_1.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"BRIDGE",
+image:"images/2.jpg",
+link:"index_2.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"PLANE",
+image:"images/3.jpg",
+link:"index_3.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"LANDSCAPE",
+image:"images/4.jpg",
+link:"index_4.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"TERRITORY",
+image:"images/5.jpg",
+link:"index_5.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"SHUTTLE",
+image:"images/6.jpg",
+link:"index_6.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"SLINGSHOT",
+image:"images/7.jpg",
+link:"index_7.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"SAMURAI",
+image:"images/8.jpg",
+link:"index_8.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"BOMBER",
+image:"images/9.jpg",
+link:"index_9.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+},
+
+{
+title:"CARAVELLE",
+image:"images/a.jpg",
+link:"index_a.html",
+text:"Detailed description of the above thing and much more, all related to the subject."
+}
+
+
+
+
+
+
+];
+
+let pos = 0;
+let cardIndex = 0;
+
+function randomCards(count){
+
+    let selected = [];
+    let pool = [...contentLibrary];
+
+    while(selected.length < count && pool.length > 0){
+
+        let index = Math.floor(Math.random() * pool.length);
+
+        selected.push(pool[index]);
+
+        pool.splice(index,1);
+    }
+
+    return selected;
+}
+
+
+
+function createCard(card){
+
+let box=document.createElement("div");
+
+box.className="dynamic-card";
+
+box.innerHTML=`
+
+<a href="${card.link}">
+
+<img src="${card.image}" loading="lazy">
+
+<div class="dynamic-card-content">
+
+<div class="dynamic-card-title">
+${card.title}
+</div>
+
+<div class="dynamic-card-text">
+${card.text}
+</div>
+
+</div>
+
+</a>
+
+`;
+
+return box;
+
+}
+
+
+
+function loadMoreCards(initial=false){
+
+    const grid = document.getElementById("dynamicGrid");
+
+    let amount = initial ? 9 : 6;
+
+    randomCards(amount).forEach(card=>{
+        grid.appendChild(createCard(card));
+    });
+
+
+    // ???? ??? ??????? ?????? (?? ????????? ????????)
+    if(!initial){
+
+        let jumpDistance = 450; // ?????????? ????? ?????
+        let startPos = pos;
+        let targetPos = pos - jumpDistance;
+
+        let startTime = null;
+        let duration = 500; // ???????? ????? (??)
+
+
+        function fastScroll(time){
+
+            if(!startTime)
+                startTime = time;
+
+
+            let progress = (time - startTime) / duration;
+
+
+            if(progress < 1){
+
+                let ease = 1 - Math.pow(1-progress,3);
+
+                pos = startPos + 
+                      (targetPos - startPos) * ease;
+
+                grid.style.transform =
+                    `translateY(${pos}px)`;
+
+                requestAnimationFrame(fastScroll);
+
+            } else {
+
+                pos = targetPos;
+            }
+        }
+
+
+        requestAnimationFrame(fastScroll);
+    }
+
+}
+
+
+
+
+
+
+
+
+const grid=document.getElementById("dynamicGrid");
+
+
+
+function animateFeed(){
+
+    pos -= 0.3;
+
+    const limit = grid.scrollHeight / 2;
+
+    if(Math.abs(pos) >= limit){
+        pos = 0;
+    }
+
+    grid.style.transform = `translateY(${pos}px)`;
+
+    requestAnimationFrame(animateFeed);
+}
+
+
+
+if (window.innerWidth > 700) {
+    loadMoreCards(true);
+    loadMoreCards();
+    loadMoreCards();
+
+grid.innerHTML += grid.innerHTML;
+}
+
+
+animateFeed();
+
+
+
+
+
+</script>
+
+
+
+<!-- end --> 
+
+</body>
+</html>
