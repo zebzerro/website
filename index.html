@@ -14,7 +14,38 @@
       margin: 0;
       padding: 0;
       font-family: 'Roboto', Arial, sans-serif;
-      background: #17191a;
+      /* background: #17191a; */
+      /*  background:
+    linear-gradient(rgba(10, 12, 15, 0.58), rgba(10, 12, 15, 0.72)), url("images/background_sky.png") center center / cover fixed no-repeat; */
+
+
+  background:
+    /* ??????? ????? cyberpunk margin */
+    linear-gradient(
+      to bottom,
+
+      /* upper part - cyberpunk margin */
+      rgba(65, 68, 72, 0.96) 0px,
+      rgba(45, 48, 52, 0.88) 47px,
+
+      /* the picture 'images/background_sky.png', see URL below  */
+      rgba(20, 22, 24, 0.15) 47px,
+      rgba(20, 22, 24, 0.15) calc(100% - 323px),
+
+      /* below part - cyberpunk margin */
+      rgba(45, 48, 52, 0.88) calc(100% - 323px),
+      rgba(65, 68, 72, 0.96) 100%
+    ),
+    url("images/background_sky.png");
+
+  background-size: 100% 100%, cover;
+  background-position: center, center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+
+
+
       color: #ececec;
       min-height: 100%;
       box-sizing: border-box;
